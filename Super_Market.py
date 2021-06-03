@@ -1,3 +1,4 @@
+import sys
 class Market:
     __product_no = []
     __product_name = []
@@ -6,19 +7,30 @@ class Market:
     __product_quantity = []
 
     def update(self):
-        self.p = int(input("Enter Number of Products: ")) #3 products
+        try:
+            self.p = int(input("Enter Number of Products: "))
+        except ValueError:
+            print("Should Enter Number: ",ValueError)
+            sys.exit()
     
         for i in range(self.p):
-            pno = input("Enter Product name: ")
-            pco = input("Enter product code: ") 
-            ppo = input("Enter product price: ")
-            pqo = input("Enter quantity of product: ")
-            self.__product_no.append(i)
-            self.__product_name.append(pno)
-            self.__product_code.append(pco)
-            self.__product_price.append(ppo)
-            self.__product_quantity.append(pqo)
-    
+            try:
+                pno = input("Enter Product name: ")
+                pco = input("Enter product code: ") 
+                ppo = int(input("Enter product price: "))
+                pqo = int(input("Enter quantity of product: "))
+            except ValueError: 
+                print('You should Enter number of price and quantity')
+            try:
+                self.__product_no.append(i)
+                self.__product_name.append(pno)
+                self.__product_code.append(pco)
+                self.__product_price.append(ppo)
+                self.__product_quantity.append(pqo)
+            except UnboundLocalError:
+                print("hello: ",UnboundLocalError)
+                sys.exit()
+
     def display(self):
         print('-----------------------------------------------------------------')
         print(' \nproduct_count \t product_name \t product_code \t product_price \t product_quantity')        
